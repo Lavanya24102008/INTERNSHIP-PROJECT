@@ -1,0 +1,379 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.dashboard-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.dashboard-header {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    padding: 30px;
+    text-align: center;
+    position: relative;
+}
+
+.dashboard-header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.dashboard-header p {
+    font-size: 1.1em;
+    opacity: 0.9;
+}
+
+.refresh-btn {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid white;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: all 0.3s ease;
+}
+
+.refresh-btn:hover {
+    background: white;
+    color: #f5576c;
+}
+
+.main-content {
+    padding: 30px;
+}
+
+.patients-section {
+    margin-bottom: 40px;
+}
+
+.section-title {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #e0e0e0;
+}
+
+.high-risk-title {
+    color: #dc3545;
+    border-bottom-color: #dc3545;
+}
+
+.low-risk-title {
+    color: #28a745;
+    border-bottom-color: #28a745;
+}
+
+.patients-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 20px;
+}
+
+.patient-card {
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.patient-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.patient-card.high-risk {
+    border-color: #dc3545;
+    background: #fff5f5;
+}
+
+.patient-card.low-risk {
+    border-color: #28a745;
+    background: #f0fff4;
+}
+
+.patient-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.patient-id {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #333;
+}
+
+.risk-badge {
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.risk-badge.high {
+    background: #dc3545;
+    color: white;
+}
+
+.risk-badge.low {
+    background: #28a745;
+    color: white;
+}
+
+.risk-badge.unknown {
+    background: #6c757d;
+    color: white;
+}
+
+.patient-info {
+    margin: 15px 0;
+}
+
+.info-item {
+    margin: 8px 0;
+    color: #666;
+    font-size: 0.95em;
+}
+
+.info-item strong {
+    color: #333;
+}
+
+.patient-actions {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.call-button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.call-button:hover {
+    transform: scale(1.02);
+    box-shadow: 0 3px 10px rgba(245, 87, 108, 0.3);
+}
+
+.call-button.high-risk {
+    background: #dc3545;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.8;
+    }
+}
+
+.no-patients {
+    text-align: center;
+    color: #999;
+    padding: 40px;
+    font-size: 1.1em;
+    grid-column: 1 / -1;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    overflow: auto;
+}
+
+.modal-content {
+    background: white;
+    margin: 50px auto;
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 900px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 2em;
+    font-weight: bold;
+    color: #999;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close:hover {
+    color: #333;
+}
+
+.modal-header {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.modal-header h2 {
+    color: #333;
+    font-size: 1.8em;
+}
+
+.modal-section {
+    margin: 20px 0;
+}
+
+.modal-section h3 {
+    color: #667eea;
+    margin-bottom: 10px;
+    font-size: 1.3em;
+}
+
+.conversation-item {
+    background: #f9f9f9;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 10px;
+    border-left: 4px solid #667eea;
+}
+
+.conversation-item.user {
+    border-left-color: #764ba2;
+    background: #f0f2ff;
+}
+
+.conversation-item strong {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.upload-item {
+    background: #fff5f5;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 10px;
+    border-left: 4px solid #dc3545;
+}
+
+.upload-item h4 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.upload-item p {
+    color: #666;
+    font-size: 0.9em;
+    line-height: 1.6;
+}
+
+/* Risk Alert Bars */
+.risk-alerts {
+    position: relative;
+    margin-top: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.alert {
+    border-radius: 12px;
+    padding: 10px 14px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    animation: slideDown 240ms ease-out;
+}
+
+.alert-high {
+    background: #dc3545;
+    color: #fff;
+}
+
+.alert-summary {
+    background: #f8f9fa;
+    color: #333;
+}
+
+.alert-title {
+    font-weight: 700;
+    letter-spacing: .2px;
+}
+
+.alert-actions .btn {
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.6);
+    border-radius: 10px;
+    padding: 6px 12px;
+    cursor: pointer;
+    transition: all .2s ease;
+}
+
+.alert-actions .btn:hover {
+    background: rgba(255,255,255,0.35);
+}
+
+.pill {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: .9em;
+}
+
+.pill-low {
+    background: #28a745;
+    color: #fff;
+}
+
+.pill-other {
+    background: #6c757d;
+    color: #fff;
+}
+
+@keyframes slideDown {
+    0% { opacity: 0; transform: translateY(-6px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Dashboard - Post‑Surgical Assistant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='patient_styles.css') }}">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <div class="header-top">
+                <div class="header-left">
+                    <h1>🩺 Patient Dashboard</h1>
+                    <p>Upload your medical reports and chat with our AI assistant</p>
+                </div>
+                <div class="header-right">
+                    <a href="/" class="home-link">🏠 Home</a>
+                    <div class="language-selector">
+                        <button id="langBtn" class="lang-btn">🌐 English</button>
+                        <div class="lang-dropdown" id="langDropdown">
+                            <button class="lang-option" data-lang="en">🇬🇧 English</button>
+                            <button class="lang-option" data-lang="ta">🇮🇳 Tamil</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <!-- Upload Section -->
+            <div class="upload-section">
+                <h2>Upload Medical Reports & Scans</h2>
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-icon">📄</div>
+                    <p>Drag and drop your files here or click to browse</p>
+                    <p class="file-types">Supported: TXT, PDF, Images</p>
+                    <input type="file" id="fileInput" multiple accept=".txt,.pdf,.jpg,.jpeg,.png">
+                </div>
+                <div id="uploadStatus"></div>
+                <div id="uploadedFiles"></div>
+            </div>
+
+            <!-- Contact Details Section -->
+            <div class="contact-section">
+                <h2>Contact Details</h2>
+                <div class="contact-form">
+                    <div class="form-row">
+                        <label for="contactName">Name</label>
+                        <input type="text" id="contactName" placeholder="Enter your full name">
+                    </div>
+                    <div class="form-row">
+                        <label for="contactPhone">Phone</label>
+                        <input type="tel" id="contactPhone" placeholder="Enter your phone number">
+                    </div>
+                    <div class="form-row">
+                        <label for="contactEmail">Email</label>
+                        <input type="email" id="contactEmail" placeholder="name@example.com">
+                    </div>
+                    <div class="form-actions">
+                        <button id="saveContactBtn">Save Contact Info</button>
+                        <span id="contactStatus" style="margin-left:10px;font-size:0.95em;"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Section -->
+            <div class="chat-section">
+                <h2>Post‑Surgical Assistant Chat</h2>
+                <div class="chat-container">
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="message bot-message">
+                            <div class="message-content">
+                                <strong>Medical Assistant:</strong> <span id="initialGreeting">Hello! I help with post‑surgical care. 
+                                Please upload your report or scan, then I'll ask a few focused questions to assess for any complications.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat-input-area">
+                        <button id="voiceButton" class="voice-btn" onclick="toggleVoiceInput()" disabled title="Voice Input">
+                            🎤
+                        </button>
+                        <input type="text" id="chatInput" placeholder="Type your message here..." disabled>
+                        <button id="sendButton" onclick="sendMessage()" disabled>Send</button>
+                    </div>
+                    <div id="voiceStatus" class="voice-status"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='patient_script.js') }}"></script>
+</body>
+</html>
+

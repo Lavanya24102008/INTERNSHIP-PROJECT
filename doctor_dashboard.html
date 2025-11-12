@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Dashboard - Medical System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='doctor_styles.css') }}">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <h1>🏥 Hospital Dashboard</h1>
+            <p>Monitor and manage patient consultations</p>
+            <button class="refresh-btn" onclick="refreshPatients()">🔄 Refresh</button>
+        </header>
+
+        <div class="main-content">
+
+
+            <!-- High Risk Patients -->
+            <div class="patients-section high-risk-section">
+                <h2 class="section-title high-risk-title">
+                    ⚠️ High Risk Patients (Priority)
+                </h2>
+                <div class="patients-grid" id="highRiskPatients">
+                    <p class="no-patients">No high-risk patients at the moment.</p>
+                </div>
+            </div>
+
+            <!-- Low Risk Patients -->
+            <div class="patients-section low-risk-section">
+                <h2 class="section-title low-risk-title">
+                    ✅ Low Risk Patients
+                </h2>
+                <div class="patients-grid" id="lowRiskPatients">
+                    <p class="no-patients">No low-risk patients at the moment.</p>
+                </div>
+            </div>
+
+            <!-- Moderate Risk Patients -->
+            <div class="patients-section other-risk-section">
+                <h2 class="section-title">🟡 Moderate Patients</h2>
+                <div class="patients-grid" id="moderatePatients">
+                    <p class="no-patients">No moderate patients at the moment.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Patient Details Modal -->
+    <div id="patientModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- Chart.js CDN for recovery charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="{{ url_for('static', filename='doctor_script.js') }}"></script>
+</body>
+</html>
+
