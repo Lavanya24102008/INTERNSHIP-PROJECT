@@ -1,4 +1,4 @@
-setuptools>=68.0.0
+setuptools>=65.0.0
 wheel>=0.41.0
 flask==3.0.0
 gunicorn==21.2.0
